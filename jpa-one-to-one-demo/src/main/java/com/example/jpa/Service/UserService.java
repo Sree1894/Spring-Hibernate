@@ -2,7 +2,9 @@ package com.example.jpa.Service;
 
 
 import com.example.jpa.model.User;
-import com.example.jpa.model.UserProfile;
+
+
+import java.util.List;
 
 
 public interface UserService {
@@ -10,4 +12,6 @@ public interface UserService {
     User findById(String id);
 
     User saveUser(User user);
+
+    List<User> findAll();
 }

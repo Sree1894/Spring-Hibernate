@@ -10,6 +10,7 @@ import com.example.jpa.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 
@@ -27,6 +28,10 @@ public class UserController {
     UserRepository userRepository;
 
 
+    @GetMapping("/users")
+    public List<User> getAllUser(){
+        return userService.findAll();
+    }
 
     //get user  by user id
     @GetMapping("/user/{id}")
@@ -58,8 +63,6 @@ public class UserController {
        }else {
            return null;
        }
-
-
 
     }
 }

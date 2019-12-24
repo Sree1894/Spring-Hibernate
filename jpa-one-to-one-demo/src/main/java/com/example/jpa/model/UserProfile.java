@@ -1,18 +1,20 @@
 package com.example.jpa.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.Date;
 
-/**
- * Created by rajeevkumarsingh on 20/11/17.
- */
+
+
 @Entity
 @Table(name = "user_profiles")
 public class UserProfile implements Serializable {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "phone_number")
@@ -49,10 +51,10 @@ public class UserProfile implements Serializable {
     @Size(max = 32)
     private String zipCode;
 
-    @OneToOne(cascade =  CascadeType.ALL)
-    @JoinColumn(name = "user_id", nullable = false,referencedColumnName = "id")
+    @OneToOne
+    @JoinColumn
+    @MapsId
     private User user;
-
 
 
     public UserProfile() {
@@ -65,6 +67,20 @@ public class UserProfile implements Serializable {
         this.phoneNumber = phoneNumber;
         this.gender = gender;
         this.dateOfBirth = dateOfBirth;
+        this.address1 = address1;
+        this.address2 = address2;
+        this.street = street;
+        this.city = city;
+        this.state = state;
+        this.country = country;
+        this.zipCode = zipCode;
+    }
+
+    public UserProfile(String phoneNumber, Gender gender,
+                       String address1, String address2, String street, String city,
+                       String state, String country, String zipCode) {
+        this.phoneNumber = phoneNumber;
+        this.gender = gender;
         this.address1 = address1;
         this.address2 = address2;
         this.street = street;
@@ -162,6 +178,7 @@ public class UserProfile implements Serializable {
         this.zipCode = zipCode;
     }
 
+    @JsonIgnore
     public User getUser() {
         return user;
     }

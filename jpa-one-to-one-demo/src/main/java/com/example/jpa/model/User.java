@@ -36,6 +36,8 @@ public class User implements Serializable {
     private String password;
 
 
+    @OneToOne(mappedBy = "user",cascade = CascadeType.ALL)
+    private UserProfile userProfile;
 
     // Hibernate requires a no-arg constructor
     public User() {
@@ -47,6 +49,14 @@ public class User implements Serializable {
         this.lastName = lastName;
         this.email = email;
         this.password = password;
+    }
+
+    public User(String firstName, String lastName, String email, String password, UserProfile userProfile) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        this.userProfile = userProfile;
     }
 
     public Long getId() {
@@ -90,4 +100,11 @@ public class User implements Serializable {
     }
 
 
+    public UserProfile getUserProfile() {
+        return userProfile;
+    }
+
+    public void setUserProfile(UserProfile userProfile) {
+        this.userProfile = userProfile;
+    }
 }
